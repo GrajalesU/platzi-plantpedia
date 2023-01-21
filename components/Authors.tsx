@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import Link from 'next/link'
-import { getAuthorList, QueryStatus } from '@api'
+import { QueryStatus, getAuthorList } from '@api'
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 type AuthorProps = {
   className?: string
@@ -31,13 +31,13 @@ export function Authors({ className }: AuthorProps) {
     <Grid container spacing={4} className={className} justify="center">
       {data.map(({ id, photo, fullName, handle }) => (
         <Grid item key={id}>
-          <Link href={`/top-stories/${handle}`}>
-            <a title={`See latest stories from ${fullName}`}>
-              <img src={photo.url} width={150} />
-              <Typography variant="h5" component="p">
-                {fullName}
-              </Typography>
-            </a>
+          <Link
+            href={`/top-stories/${handle}`}
+          >
+            <img src={photo.url} width={150} />
+            <Typography variant="h5" component="p">
+              {fullName}
+            </Typography>
           </Link>
         </Grid>
       ))}
