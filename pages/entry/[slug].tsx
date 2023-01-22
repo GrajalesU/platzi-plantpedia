@@ -6,6 +6,7 @@ import { RichText } from '@components/RichText'
 import { Grid, Typography } from '@material-ui/core'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 type ProductDetailProps = {
   plant: Plant
@@ -37,6 +38,7 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
         otherEntries,
         categories,
       },
+      revalidate: 5 * 60,
     }
   } catch (_) {
     return {
@@ -52,7 +54,7 @@ type PathType = {
 }
 
 export const getStaticPaths = async () => {
-  const plants = await getPlantList()
+  const plants = await getPlantList({ limit: 10 })
 
   const paths: PathType[] = plants.map(({ slug }: Plant) => ({
     params: {
@@ -61,7 +63,7 @@ export const getStaticPaths = async () => {
   }))
   return {
     paths,
-    fallback: false,
+    fallback: true,
   }
 }
 
@@ -70,6 +72,16 @@ export default function PlantDetail({
   otherEntries,
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
+  const router = useRouter()
+  if (router.isFallback) {
+    return (
+      <Layout>
+        <div className="flex justify-center items-center min-h-screen">
+          Loading...
+        </div>
+      </Layout>
+    )
+  }
   return (
     <Layout>
       <Grid container spacing={4}>
