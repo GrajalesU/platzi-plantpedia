@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import Head from 'next/head'
 import { AppBar, Toolbar } from '@material-ui/core'
+import Head from 'next/head'
+import { useEffect, useState } from 'react'
 
+import Link from 'next/link'
 import { Typography } from './Typography'
 
 type Props = {
@@ -74,13 +75,11 @@ function PlantpediaNoLoVeniasVenirLogo({ title }: { title: string }) {
         ></link>
       </Head>
       <Typography variant="h4" className="flex-grow" component="h1">
-        <a
-          href="/"
-          onMouseEnter={toggleCraziness}
-          onMouseLeave={toggleCraziness}
-        >
-          {title}
-        </a>
+        <Link href="/">
+          <span onMouseEnter={toggleCraziness} onMouseLeave={toggleCraziness}>
+            {title}
+          </span>
+        </Link>
       </Typography>
     </>
   )
