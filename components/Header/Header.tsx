@@ -7,6 +7,7 @@ export function Header() {
       <NavBar title="🌿 Plantpedia">
         <div>
           <Link href={'/category'}>Categories</Link>
+          <Link href={'/top-stories'}>Authors</Link>
         </div>
       </NavBar>
     </div>
