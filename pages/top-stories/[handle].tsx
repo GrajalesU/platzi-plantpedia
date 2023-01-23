@@ -1,4 +1,5 @@
 import { getAuthorList, getPlantListByAuthor } from '@api/index'
+import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 import { Typography } from '@material-ui/core'
@@ -60,7 +61,7 @@ export default function AuthorDetail({
     <Layout>
       <div className="relative text-center pb-10 mb-10 border-b-2 border-grey-200">
         <div className="opacity-60 inline-block">
-          <img src={author.photo.url} width={600} />
+          <Image src={author.photo.url} width={600} alt={author.photo.title} aspectRatio='1:1' />
         </div>
         <div className="text-container absolute">
           <Typography

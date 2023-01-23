@@ -1,4 +1,5 @@
 import { Typography } from '@ui/Typography'
+import Image from './Image'
 
 export function AuthorCard({
   fullName,
@@ -10,7 +11,12 @@ export function AuthorCard({
   return (
     <div className="md:flex">
       <div className="pr-8 pb-4 flex-shrink-0">
-        <img src={photo.url} width={192} />
+        <Image
+          src={photo.url}
+          width={192}
+          alt={photo.title}
+          aspectRatio="1:1"
+        />
       </div>
       <div>
         <Typography variant="h5" component="p">

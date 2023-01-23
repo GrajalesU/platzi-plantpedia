@@ -1,4 +1,5 @@
 import { getAuthorList } from '@api/index'
+import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { Grid, Typography } from '@material-ui/core'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -28,9 +29,18 @@ export default function Authors({
       </Typography>
       <Grid container spacing={4} className="mb-10" justify="center">
         {authors.map(({ id, photo, fullName, handle }) => (
-          <Grid item key={id} className=' m-5 transform hover:scale-125 transition'>
+          <Grid
+            item
+            key={id}
+            className=" m-5 transform hover:scale-125 transition"
+          >
             <Link href={`/top-stories/${handle}`}>
-              <img src={photo.url} width={150} />
+              <Image
+                src={photo.url}
+                width={150}
+                alt={photo.title}
+                aspectRatio="1:1"
+              />
               <Typography variant="h5" component="p">
                 {fullName}
               </Typography>

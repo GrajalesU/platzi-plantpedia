@@ -1,4 +1,5 @@
 import { getCategoryList, getPlantListByCategory } from '@api/index'
+import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 import { Typography } from '@material-ui/core'
@@ -75,7 +76,7 @@ export default function Category({
     <Layout>
       <div className="relative text-center mb-10">
         <div className="opacity-60 inline-block">
-          <img src={category.icon.url} width={600} />
+          <Image src={category.icon.url} width={600} alt={category.icon.title} aspectRatio='16:9' />
         </div>
         <div className="text-container absolute">
           <Typography

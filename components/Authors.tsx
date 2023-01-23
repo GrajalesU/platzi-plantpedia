@@ -1,4 +1,5 @@
 import { QueryStatus, getAuthorList } from '@api'
+import Image from '@components/Image'
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
 import Link from 'next/link'
@@ -31,10 +32,13 @@ export function Authors({ className }: AuthorProps) {
     <Grid container spacing={4} className={className} justify="center">
       {data.map(({ id, photo, fullName, handle }) => (
         <Grid item key={id}>
-          <Link
-            href={`/top-stories/${handle}`}
-          >
-            <img src={photo.url} width={150} />
+          <Link href={`/top-stories/${handle}`}>
+            <Image
+              src={photo.url}
+              width={150}
+              alt={photo.title}
+              aspectRatio="1:1"
+            />
             <Typography variant="h5" component="p">
               {fullName}
             </Typography>

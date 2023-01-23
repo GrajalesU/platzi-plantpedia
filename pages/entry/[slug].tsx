@@ -1,5 +1,6 @@
 import { getCategoryList, getPlant, getPlantList } from '@api/index'
 import { AuthorCard } from '@components/AuthorCard'
+import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { PlantEntryInline } from '@components/PlantCollection'
 import { RichText } from '@components/RichText'
@@ -87,7 +88,7 @@ export default function PlantDetail({
       <Grid container spacing={4}>
         <Grid item xs={12} md={8} lg={9} component="article">
           <figure>
-            <img src={plant.image.url} />
+            <Image src={plant.image.url} width={plant.image.width} alt={plant.image.title} aspectRatio='16:9' fit='fill' />
           </figure>
           <div className="px-12 pt-8">
             <Typography variant="h2">{plant.plantName}</Typography>

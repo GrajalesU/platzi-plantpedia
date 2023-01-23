@@ -1,4 +1,5 @@
 import { getCategoryList } from '@api/index'
+import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { Button, Grid, Typography } from '@material-ui/core'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
@@ -32,7 +33,12 @@ export default function Category({
           <Grid key={category.id} role="listitem" item xs={6} md={4}>
             <Link href={`/category/${category.slug}`}>
               <div className="opacity-95 hover:opacity-100">
-                <img src={category.icon.url} alt={category.icon.title} />
+                <Image
+                  src={category.icon.url}
+                  alt={category.icon.title}
+                  width={300}
+                  aspectRatio="16:9"
+                />
                 <Typography variant="h3">{category.title}</Typography>
                 <div className="px-4 py-4">
                   <Typography
