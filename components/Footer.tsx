@@ -1,6 +1,7 @@
-import clsx from 'clsx'
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
+import clsx from 'clsx'
+import Link from 'next/link'
 
 export const Footer = ({ className }: { className?: string }) => {
   return (
@@ -19,9 +20,9 @@ export const Footer = ({ className }: { className?: string }) => {
             className="text-center sm:text-left relative"
           >
             <PlantpediaLogo />
-            <Typography variant="h5" component="a" href="/" title="Go home">
-              Platzi's Plantpedia
-            </Typography>
+            <Link href={'/'} className='z-30 relative'>
+              <Typography variant="h5">Platzi's Plantpedia</Typography>
+            </Link>
           </Grid>
           <Grid item xs={6} sm={4}>
             <Typography variant="h5" className="mb-4">
@@ -29,13 +30,16 @@ export const Footer = ({ className }: { className?: string }) => {
             </Typography>
             <ul className="p0">
               <li className="pb-1">
-                <a href="/getting-started">Getting started</a>
+                <Link href="/category">Categories</Link>
               </li>
               <li className="pb-1">
-                <a href="/search">Search</a>
+                <Link href="/top-stories">Top stories</Link>
               </li>
               <li className="pb-1">
-                <a href="/top-stories">Top stories</a>
+                <Link href="/docs">Docs</Link>
+              </li>
+              <li className="pb-1">
+                <Link href="/ui">UI</Link>
               </li>
             </ul>
           </Grid>
@@ -49,14 +53,14 @@ export const Footer = ({ className }: { className?: string }) => {
             </p>
             <div className="mt-3">
               <a
-                href="https://twitter.com/jonalvarezz"
-                title="Follow @jonalvarezz on Twitter"
+                href="https://www.linkedin.com/in/juan-manuel-grajales-urquijo"
+                title="Go to linkedIn profile"
                 className="pr-4"
               >
-                TW
+                LI
               </a>
               <a
-                href="https://github.com/jonalvarezz"
+                href="https://github.com/grajalesu/platzi-plantpedia"
                 title="Open this project on GitHub"
               >
                 GH
@@ -72,8 +76,8 @@ export const Footer = ({ className }: { className?: string }) => {
             </a>
           </p>
           <p>
-            <a target="_blank" href="https://jonalvarezz.com">
-              jonalvarezz.com
+            <a target="_blank" href="https://grajalesu.vercel.app">
+              grajalesu.vercel.app
             </a>
           </p>
         </div>
@@ -96,6 +100,7 @@ function PlantpediaLogo() {
             bottom: 0;
             left: -40px;
             transform: rotate(120deg);
+            z-index: 1;
           }
 
           @media screen and (min-width: 600px) {
