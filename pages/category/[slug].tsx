@@ -62,7 +62,6 @@ export default function Category({
   plants,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
-  console.log(plants)
   if (router.isFallback) {
     return (
       <Layout>
