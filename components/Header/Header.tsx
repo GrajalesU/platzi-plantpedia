@@ -6,7 +6,7 @@ export function Header() {
     <div className="mx-auto" style={{ maxWidth: '98%' }}>
       <NavBar title="🌿 Plantpedia">
         <div>
-          <Link href={'/category'}>Categories</Link>
+          <Link href={'/category'} className='mx-4'>Categories</Link>
           <Link href={'/top-stories'}>Authors</Link>
         </div>
       </NavBar>
