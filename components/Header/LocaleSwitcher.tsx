@@ -1,14 +1,16 @@
 import Typography from '@material-ui/core/Typography'
+import { useTranslation } from 'next-i18next'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 const LocaleSwitcher = ({ className = '' }: { className?: string }) => {
   const { locale, asPath: currentPath } = useRouter()
+  const { t } = useTranslation('common')
 
   return (
     <div className='flex w-full  h-8 items-center justify-end'>
       <div className="flex gap-2  right-1 mr-6">
-        Language: 
+        {t('language')}: 
         {locale === 'en-US' ? (
           <span style={{ cursor: 'default' }} className={className}>
             <NextLink passHref href={currentPath} locale="es">
