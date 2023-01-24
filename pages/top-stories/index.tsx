@@ -18,9 +18,9 @@ export const getStaticProps: GetStaticProps<AuthorsProps> = async ({locale}) => 
   return {
     props: {
       authors,
+      ...i18nConf,
     },
     revalidate: 10 * 60,
-    ...i18nConf,
 
   }
 }

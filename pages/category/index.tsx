@@ -31,6 +31,7 @@ export default function Category({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { t } = useTranslation('common')
+  console.log(t("categories"))
 
   return (
     <Layout>

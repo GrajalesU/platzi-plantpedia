@@ -3,7 +3,8 @@ import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 import { Typography } from '@material-ui/core'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { flatMap } from 'lodash'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 
 type AuthorDetailProps = {
   author: Author
@@ -40,19 +41,39 @@ export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({
   }
 }
 
-export const getStaticPaths = async () => {
-  const authors = await getAuthorList()
-  const paths = authors.map(({ handle }) => ({
-    params: {
-      handle,
-    },
-  }))
+type PathType = {
+  params: {
+    handle: string
+  }
+  locale: string
+}
 
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  if (locales === undefined) {
+    throw new Error(
+      'Oh, did you forget to configure locales in your Next Configuration (Next.config.js)'
+    )
+  }
+
+  const authors = await getAuthorList()
+  const paths: PathType[] = flatMap(
+    authors.map(({ handle }: Author) => ({
+      params: {
+        handle,
+      },
+    })),
+    (path) =>
+      locales.map((locale) => ({
+        locale,
+        ...path,
+      }))
+  )
   return {
     paths,
     fallback: false,
   }
 }
+
 export default function AuthorDetail({
   author,
   plants,
@@ -61,7 +82,12 @@ export default function AuthorDetail({
     <Layout>
       <div className="relative text-center pb-10 mb-10 border-b-2 border-grey-200">
         <div className="opacity-60 inline-block">
-          <Image src={author.photo.url} width={600} alt={author.photo.title} aspectRatio='1:1' />
+          <Image
+            src={author.photo.url}
+            width={600}
+            alt={author.photo.title}
+            aspectRatio="1:1"
+          />
         </div>
         <div className="text-container absolute">
           <Typography
