@@ -16,7 +16,7 @@ export function Hero({ plantName, slug, image, className }: HeroProps) {
             <Typography
               variant="h1"
               component="h2"
-              className="break-words text-left text-6xl sm:text-8xl capitalize"
+              className="break-words text-left text-6xl sm:text-4xl capitalize"
             >
               {plantName}
             </Typography>
