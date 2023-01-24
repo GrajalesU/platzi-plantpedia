@@ -123,7 +123,7 @@ export default function PlantDetail({
               {categories?.map((category) => (
                 <li key={category.id}>
                   <Link passHref href={`/category/${category.slug}`}>
-                    <Typography component="a" variant="h6">
+                    <Typography component="a" variant="h6" className='hover:text-gray-500 transition-colors'>
                       {category.title}
                     </Typography>
                   </Link>

@@ -53,7 +53,7 @@ export function PlantEntry({ plant, variant = 'square' }: PlantEntryType) {
 export function PlantEntrySquare({ image, plantName, slug }: Plant) {
   return (
     <Link href={`/entry/${slug}`}>
-      <div className="opacity-95 hover:opacity-100">
+      <div className="opacity-80 hover:opacity-100">
         <Image
           src={image.url}
           alt={image.title}
@@ -79,7 +79,7 @@ export function PlantEntryInline({
   return (
     <Link href={`/entry/${slug}`}>
       <div
-        className={`opacity-95 hover:opacity-100 flex items-end ${className}`}
+        className={`opacity-80 hover:opacity-100 flex items-end ${className}`}
       >
         <Image
           src={image.url}
@@ -105,7 +105,7 @@ export function PlantEntryVertical({
   slug,
 }: Plant) {
   return (
-    <div className="opacity-95 hover:opacity-100">
+    <div className="opacity-80 hover:opacity-100">
       <Link href={`/entry/${slug}`}>
         <Image
           src={image.url}

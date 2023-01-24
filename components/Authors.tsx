@@ -31,7 +31,7 @@ export function Authors({ className }: AuthorProps) {
   return (
     <Grid container spacing={4} className={className} justify="center">
       {data.map(({ id, photo, fullName, handle }) => (
-        <Grid item key={id}>
+        <Grid item key={id} className="transform hover:scale-110 transition">
           <Link href={`/top-stories/${handle}`}>
             <Image
               src={photo.url}
