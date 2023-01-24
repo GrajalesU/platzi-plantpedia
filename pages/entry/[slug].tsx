@@ -17,6 +17,7 @@ type ProductDetailProps = {
 
 export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
   params,
+  preview,
 }) => {
   const slug = params?.slug
   if (typeof slug !== 'string') {
@@ -25,7 +26,7 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
     }
   }
   try {
-    const plant = await getPlant(slug)
+    const plant = await getPlant(slug, preview)
     const otherEntries = await getPlantList({
       limit: 5,
     })
@@ -88,7 +89,13 @@ export default function PlantDetail({
       <Grid container spacing={4}>
         <Grid item xs={12} md={8} lg={9} component="article">
           <figure>
-            <Image src={plant.image.url} width={plant.image.width} alt={plant.image.title} aspectRatio='16:9' fit='fill' />
+            <Image
+              src={plant.image.url}
+              width={plant.image.width}
+              alt={plant.image.title}
+              aspectRatio="16:9"
+              fit="fill"
+            />
           </figure>
           <div className="px-12 pt-8">
             <Typography variant="h2">{plant.plantName}</Typography>
