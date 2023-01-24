@@ -7,6 +7,8 @@ import { RichText } from '@components/RichText'
 import { Grid, Typography } from '@material-ui/core'
 import { flatMap } from 'lodash'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -35,14 +37,16 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
     })
     const categories = await getCategoryList({
       limit: 10,
-      locale
+      locale,
     })
+    const i18nConf = await serverSideTranslations(locale!)
 
     return {
       props: {
         plant,
         otherEntries,
         categories,
+        ...i18nConf,
       },
       revalidate: 5 * 60,
     }
@@ -93,6 +97,8 @@ export default function PlantDetail({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
+  const { t } = useTranslation('entries')
+
   if (router.isFallback) {
     return (
       <Layout>
@@ -125,7 +131,7 @@ export default function PlantDetail({
         <Grid item xs={12} md={4} lg={3} component="aside">
           <section>
             <Typography variant="h5" component="h3" className="mb-4">
-              Recent Posts
+              {t('recent-posts')}
             </Typography>
             {otherEntries?.map((entry) => (
               <article className="mb-4" key={entry.id}>
@@ -135,7 +141,7 @@ export default function PlantDetail({
           </section>
           <section className="mt-10">
             <Typography variant="h5" component="h3" className="mb-4">
-              Categories
+              {t('categories')}
             </Typography>
             <ul className="list">
               {categories?.map((category) => (
