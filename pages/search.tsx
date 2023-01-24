@@ -1,7 +1,7 @@
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { ChangeEventHandler, useEffect, useState } from 'react'
+import { ChangeEventHandler, useCallback, useEffect, useState } from 'react'
 
 import {
   FormControl,
@@ -16,6 +16,7 @@ import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 
 import { QueryStatus, searchPlants } from '@api'
+import { debounce } from 'lodash'
 import { useRouter } from 'next/router'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
@@ -28,6 +29,20 @@ export default function Search() {
   const [term, setTerm] = useState('')
   const [status, setStatus] = useState<QueryStatus>('idle')
   const [results, setResults] = useState<Plant[]>([])
+
+  const debouncedSearchPlants = useCallback(
+    debounce((term: string) => {
+      searchPlants({
+        term,
+        limit: 10,
+        locale,
+      }).then((data) => {
+        setResults(data)
+        setStatus('success')
+      })
+    }, 500),
+    []
+  )
 
   const updateTerm: ChangeEventHandler<HTMLInputElement> = (event) =>
     setTerm(event.currentTarget.value)
@@ -43,15 +58,7 @@ export default function Search() {
 
     setStatus('loading')
 
-    // Pagination not supported... yet
-    searchPlants({
-      term,
-      limit: 10,
-      locale,
-    }).then((data) => {
-      setResults(data)
-      setStatus('success')
-    })
+    debouncedSearchPlants(term)
   }, [term])
 
   return (
