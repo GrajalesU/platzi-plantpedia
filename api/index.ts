@@ -91,7 +91,7 @@ export function getCategoryList(
   args?: IGetCategoryListQueryVariables
 ): Promise<Category[]> {
   return api
-    .getCategoryList({ limit: 10, skip: 0, ...args })
+    .getCategoryList({ limit: 10, skip: 0,locale: 'en-US', ...args })
     .then((responseData) =>
       selectors.selectCategories(responseData.categoryCollection)
     )

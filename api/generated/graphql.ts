@@ -47,8 +47,51 @@ export type IAsset = {
 
 
 /** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetTitleArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetDescriptionArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetContentTypeArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetFileNameArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetSizeArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
 export type IAssetUrlArgs = {
   transform?: Maybe<IImageTransformOptions>;
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetWidthArgs = {
+  locale?: Maybe<Scalars['String']>;
+};
+
+
+/** Represents a binary file in a space. An asset can be any file type. */
+export type IAssetHeightArgs = {
+  locale?: Maybe<Scalars['String']>;
 };
 
 
@@ -137,9 +180,9 @@ export type IAssetFilter = {
 export type IAssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   entryCollection?: Maybe<IEntryCollection>;
-  plantCollection?: Maybe<IPlantCollection>;
-  authorCollection?: Maybe<IAuthorCollection>;
   categoryCollection?: Maybe<ICategoryCollection>;
+  authorCollection?: Maybe<IAuthorCollection>;
+  plantCollection?: Maybe<IPlantCollection>;
 };
 
 
@@ -151,7 +194,7 @@ export type IAssetLinkingCollectionsEntryCollectionArgs = {
 };
 
 
-export type IAssetLinkingCollectionsPlantCollectionArgs = {
+export type IAssetLinkingCollectionsCategoryCollectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -167,7 +210,7 @@ export type IAssetLinkingCollectionsAuthorCollectionArgs = {
 };
 
 
-export type IAssetLinkingCollectionsCategoryCollectionArgs = {
+export type IAssetLinkingCollectionsPlantCollectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
@@ -197,7 +240,7 @@ export enum IAssetOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthor = IEntry & {
   __typename?: 'Author';
   sys: ISys;
@@ -212,44 +255,44 @@ export type IAuthor = IEntry & {
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorLinkedFromArgs = {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorPhotoArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorFullNameArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorHandleArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorBiographyArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorTwitterArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** Plant entry creator [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/author) */
+/** Plant entry creator [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/author) */
 export type IAuthorLinkedInArgs = {
   locale?: Maybe<Scalars['String']>;
 };
@@ -346,7 +389,7 @@ export enum IAuthorOrder {
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategory = IEntry & {
   __typename?: 'Category';
   sys: ISys;
@@ -359,32 +402,32 @@ export type ICategory = IEntry & {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategoryLinkedFromArgs = {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategoryTitleArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategorySlugArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategoryIconArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/category) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/category) */
 export type ICategoryCategoryDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
@@ -539,7 +582,8 @@ export enum IImageFormat {
    */
   Png8 = 'PNG8',
   /** WebP image format. */
-  Webp = 'WEBP'
+  Webp = 'WEBP',
+  Avif = 'AVIF'
 }
 
 export enum IImageResizeFocus {
@@ -616,7 +660,7 @@ export type IImageTransformOptions = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlant = IEntry & {
   __typename?: 'Plant';
   sys: ISys;
@@ -631,45 +675,45 @@ export type IPlant = IEntry & {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantLinkedFromArgs = {
   allowedLocales?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantPlantNameArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantSlugArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantDescriptionArgs = {
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantImageArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantCategoryArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/t888he5mrnzj/content_types/plant) */
+/** [See type definition](https://app.contentful.com/spaces/n1w2lh7fdmo0/content_types/plant) */
 export type IPlantAuthorArgs = {
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
@@ -768,12 +812,12 @@ export type IQuery = {
   __typename?: 'Query';
   asset?: Maybe<IAsset>;
   assetCollection?: Maybe<IAssetCollection>;
-  plant?: Maybe<IPlant>;
-  plantCollection?: Maybe<IPlantCollection>;
-  author?: Maybe<IAuthor>;
-  authorCollection?: Maybe<IAuthorCollection>;
   category?: Maybe<ICategory>;
   categoryCollection?: Maybe<ICategoryCollection>;
+  author?: Maybe<IAuthor>;
+  authorCollection?: Maybe<IAuthorCollection>;
+  plant?: Maybe<IPlant>;
+  plantCollection?: Maybe<IPlantCollection>;
   entryCollection?: Maybe<IEntryCollection>;
 };
 
@@ -795,20 +839,20 @@ export type IQueryAssetCollectionArgs = {
 };
 
 
-export type IQueryPlantArgs = {
+export type IQueryCategoryArgs = {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-export type IQueryPlantCollectionArgs = {
+export type IQueryCategoryCollectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
-  where?: Maybe<IPlantFilter>;
-  order?: Maybe<Array<Maybe<IPlantOrder>>>;
+  where?: Maybe<ICategoryFilter>;
+  order?: Maybe<Array<Maybe<ICategoryOrder>>>;
 };
 
 
@@ -829,20 +873,20 @@ export type IQueryAuthorCollectionArgs = {
 };
 
 
-export type IQueryCategoryArgs = {
+export type IQueryPlantArgs = {
   id: Scalars['String'];
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
 };
 
 
-export type IQueryCategoryCollectionArgs = {
+export type IQueryPlantCollectionArgs = {
   skip?: Maybe<Scalars['Int']>;
   limit?: Maybe<Scalars['Int']>;
   preview?: Maybe<Scalars['Boolean']>;
   locale?: Maybe<Scalars['String']>;
-  where?: Maybe<ICategoryFilter>;
-  order?: Maybe<Array<Maybe<ICategoryOrder>>>;
+  where?: Maybe<IPlantFilter>;
+  order?: Maybe<Array<Maybe<IPlantOrder>>>;
 };
 
 
@@ -1086,6 +1130,7 @@ export type IGetCategoryListQueryVariables = Exact<{
   limit?: Maybe<Scalars['Int']>;
   skip?: Maybe<Scalars['Int']>;
   order?: Maybe<Array<Maybe<ICategoryOrder>> | Maybe<ICategoryOrder>>;
+  locale?: Maybe<Scalars['String']>
 }>;
 
 
@@ -1262,8 +1307,8 @@ export const SearchPlantDocument = gql`
 }
     ${PlantFieldsFragmentDoc}`;
 export const GetCategoryListDocument = gql`
-    query getCategoryList($limit: Int = 10, $skip: Int = 0, $order: [CategoryOrder] = sys_publishedAt_DESC) {
-  categoryCollection(limit: $limit, skip: $skip, order: $order) {
+    query getCategoryList($limit: Int = 10, $skip: Int = 0, $order: [CategoryOrder] = sys_publishedAt_DESC, $locale: String = "en-US") {
+  categoryCollection(limit: $limit, skip: $skip, order: $order, locale: $locale) {
     items {
       ...CategoryFields
     }
