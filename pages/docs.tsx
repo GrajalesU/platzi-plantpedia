@@ -3,6 +3,13 @@ import { Button } from '@ui/Button'
 import { Grid } from '@ui/Grid'
 import { Typography } from '@ui/Typography'
 
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: await serverSideTranslations(locale!),
+})
+
 export default function Docs() {
   return (
     <Layout>
