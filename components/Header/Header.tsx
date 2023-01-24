@@ -8,8 +8,8 @@ export function Header() {
     <>
       <PreviewModeBanner />
       <div className="mx-auto relative" style={{ maxWidth: '98%' }}>
+        <LocaleSwitcher className='flex-grow flex gap-1 justify-items-center'/>
         <NavBar title="🌿 Plantpedia">
-          <LocaleSwitcher className='flex-grow flex gap-1 justify-items-center'/>
           <div className="change-color">
             <Link
               href={'/category'}
