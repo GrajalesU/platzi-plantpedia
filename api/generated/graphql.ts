@@ -1166,6 +1166,7 @@ export type IGetAuthorListQuery = (
 export type IGetPlantListByAuthorQueryVariables = Exact<{
   authorId: Scalars['String'];
   limit?: Maybe<Scalars['Int']>;
+  locale?:Maybe<Scalars["String"]>;
 }>;
 
 
@@ -1325,8 +1326,8 @@ export const GetAuthorListDocument = gql`
 }
     ${AuthorFieldsFragmentDoc}`;
 export const GetPlantListByAuthorDocument = gql`
-    query getPlantListByAuthor($authorId: String!, $limit: Int = 10) {
-  plantCollection(limit: $limit, where: {author: {sys: {id: $authorId}}}) {
+    query getPlantListByAuthor($authorId: String!, $limit: Int = 10, $locale: String = "en-US") {
+  plantCollection(limit: $limit, locale: $locale, where: {author: {sys: {id: $authorId}}}) {
     items {
       ...PlantFields
     }

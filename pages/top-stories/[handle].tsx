@@ -28,6 +28,7 @@ export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({
     const author = authors.filter((author) => author.handle === handle)[0]
     const plants = await getPlantListByAuthor({
       authorId: author.id,
+      locale
     })
   const i18nConf = await serverSideTranslations(locale!)
 
