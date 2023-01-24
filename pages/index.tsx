@@ -4,6 +4,7 @@ import { Hero } from '@components/Hero'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useEffect } from 'react'
 
 const PLANT_LIMIT = 10
@@ -13,11 +14,13 @@ type HomeProps = {
 }
 
 export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
-  const plants = await getPlantList({ limit: PLANT_LIMIT , locale })
+  const plants = await getPlantList({ limit: PLANT_LIMIT, locale })
+  const i18nConf = await serverSideTranslations(locale!)
 
   return {
     props: {
       plants,
+      ...i18nConf
     },
     revalidate: 5 * 60,
   }
