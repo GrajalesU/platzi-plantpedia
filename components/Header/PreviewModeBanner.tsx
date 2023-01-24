@@ -1,13 +1,6 @@
-import { useEffect, useState } from 'react'
-
-import { Button } from '@ui/Button'
 import { Alert } from '@ui/Alert'
+import { Button } from '@ui/Button'
 import { useRouter } from 'next/router'
-
-type PreviewStatusResponse = {
-  preview: boolean
-  context: Json
-} | null
 
 export function PreviewModeBanner() {
   const router = useRouter()
