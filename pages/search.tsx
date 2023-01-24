@@ -1,13 +1,13 @@
-import { useState, ChangeEventHandler, useEffect } from 'react'
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 
 import {
-  OutlinedInput,
-  InputLabel,
-  InputAdornment,
   FormControl,
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
 } from '@ui/FormField'
 import { SearchIcon } from '@ui/icon/Search'
 import { Typography } from '@ui/Typography'
@@ -15,7 +15,8 @@ import { Typography } from '@ui/Typography'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 
-import { searchPlants, QueryStatus } from '@api'
+import { QueryStatus, searchPlants } from '@api'
+import { useRouter } from 'next/router'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: await serverSideTranslations(locale!),
@@ -23,6 +24,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 
 export default function Search() {
   const { t } = useTranslation('page-search')
+  const { locale } = useRouter()
   const [term, setTerm] = useState('')
   const [status, setStatus] = useState<QueryStatus>('idle')
   const [results, setResults] = useState<Plant[]>([])
@@ -45,6 +47,7 @@ export default function Search() {
     searchPlants({
       term,
       limit: 10,
+      locale,
     }).then((data) => {
       setResults(data)
       setStatus('success')
@@ -53,7 +56,12 @@ export default function Search() {
 
   return (
     <Layout>
-      <main className="pt-16 text-center">
+      <main
+        className="pt-16 text-center"
+        style={{
+          minHeight: '60vh',
+        }}
+      >
         <div className="max-w-5xl mx-auto mb-6">
           <FormControl fullWidth className="" variant="outlined">
             <InputLabel htmlFor="search-term-field">{t('term')}</InputLabel>
