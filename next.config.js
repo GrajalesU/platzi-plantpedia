@@ -4,6 +4,10 @@ const nextConfig = {
   images: {
     domains: ['images.ctfassets.net'],
   },
+  i18n: {
+    locales: ['en-US', 'es'],
+    defaultLocale: 'en-US',
+  }
 }
 
 module.exports = nextConfig

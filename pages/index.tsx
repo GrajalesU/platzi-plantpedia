@@ -12,8 +12,8 @@ type HomeProps = {
   plants: Plant[]
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const plants = await getPlantList({ limit: PLANT_LIMIT })
+export const getStaticProps: GetStaticProps<HomeProps> = async ({ locale }) => {
+  const plants = await getPlantList({ limit: PLANT_LIMIT , locale })
 
   return {
     props: {

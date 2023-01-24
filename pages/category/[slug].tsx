@@ -3,7 +3,8 @@ import Image from '@components/Image'
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 import { Typography } from '@material-ui/core'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { flatMap } from 'lodash'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
 
 type CategoryProps = {
@@ -13,6 +14,7 @@ type CategoryProps = {
 
 export const getStaticProps: GetStaticProps<CategoryProps> = async ({
   params,
+  locale,
 }) => {
   const slug = params?.slug
   if (typeof slug !== 'string') {
@@ -24,6 +26,7 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
   try {
     const { category, entries: plants } = await getPlantListByCategory({
       category: slug,
+      locale,
     })
 
     return {
@@ -43,15 +46,29 @@ type PathType = {
   params: {
     slug: string
   }
+  locale: string
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  if (locales === undefined) {
+    throw new Error(
+      'Oh, did you forget to configure locales in your Next Configuration (Next.config.js)'
+    )
+  }
+
   const categories = await getCategoryList()
-  const paths: PathType[] = categories.map(({ slug }: Category) => ({
-    params: {
-      slug,
-    },
-  }))
+  const paths: PathType[] = flatMap(
+    categories.map(({ slug }: Category) => ({
+      params: {
+        slug,
+      },
+    })),
+    (path) =>
+      locales.map((locale) => ({
+        locale,
+        ...path,
+      }))
+  )
   return {
     paths,
     fallback: true,
@@ -76,7 +93,12 @@ export default function Category({
     <Layout>
       <div className="relative text-center mb-10">
         <div className="opacity-60 inline-block">
-          <Image src={category.icon.url} width={600} alt={category.icon.title} aspectRatio='16:9' />
+          <Image
+            src={category.icon.url}
+            width={600}
+            alt={category.icon.title}
+            aspectRatio="16:9"
+          />
         </div>
         <div className="text-container absolute">
           <Typography
@@ -85,9 +107,14 @@ export default function Category({
           >
             {category.title}
           </Typography>
-      <Typography variant='h5' component='p' className='mt-5 text-left' color='textPrimary'>
-        {category.description}
-      </Typography>
+          <Typography
+            variant="h5"
+            component="p"
+            className="mt-5 text-left"
+            color="textPrimary"
+          >
+            {category.description}
+          </Typography>
         </div>
       </div>
       <PlantCollection plants={plants} variant="square" />

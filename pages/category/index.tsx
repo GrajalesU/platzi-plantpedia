@@ -9,8 +9,10 @@ type CategoryProps = {
   categories: Category[]
 }
 
-export const getStaticProps: GetStaticProps<CategoryProps> = async () => {
-  const categories = await getCategoryList()
+export const getStaticProps: GetStaticProps<CategoryProps> = async ({
+  locale,
+}) => {
+  const categories = await getCategoryList({ locale })
 
   return {
     props: {

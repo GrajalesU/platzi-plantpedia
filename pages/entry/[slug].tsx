@@ -5,7 +5,8 @@ import { Layout } from '@components/Layout'
 import { PlantEntryInline } from '@components/PlantCollection'
 import { RichText } from '@components/RichText'
 import { Grid, Typography } from '@material-ui/core'
-import { GetStaticProps, InferGetStaticPropsType } from 'next'
+import { flatMap } from 'lodash'
+import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -18,6 +19,7 @@ type ProductDetailProps = {
 export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
   params,
   preview,
+  locale,
 }) => {
   const slug = params?.slug
   if (typeof slug !== 'string') {
@@ -26,12 +28,14 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async ({
     }
   }
   try {
-    const plant = await getPlant(slug, preview)
+    const plant = await getPlant(slug, preview, locale)
     const otherEntries = await getPlantList({
       limit: 5,
+      locale,
     })
     const categories = await getCategoryList({
       limit: 10,
+      locale
     })
 
     return {
@@ -53,16 +57,30 @@ type PathType = {
   params: {
     slug: string
   }
+  locale: string
 }
 
-export const getStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
+  if (locales === undefined) {
+    throw new Error(
+      'Oh, did you forget to configure locales in your Next Configuration (Next.config.js)'
+    )
+  }
+
   const plants = await getPlantList({ limit: 10 })
 
-  const paths: PathType[] = plants.map(({ slug }: Plant) => ({
-    params: {
-      slug,
-    },
-  }))
+  const paths: PathType[] = flatMap(
+    plants.map(({ slug }: Plant) => ({
+      params: {
+        slug,
+      },
+    })),
+    (path) =>
+      locales.map((locale) => ({
+        locale,
+        ...path,
+      }))
+  )
   return {
     paths,
     fallback: true,
@@ -123,7 +141,11 @@ export default function PlantDetail({
               {categories?.map((category) => (
                 <li key={category.id}>
                   <Link passHref href={`/category/${category.slug}`}>
-                    <Typography component="a" variant="h6" className='hover:text-gray-500 transition-colors'>
+                    <Typography
+                      component="a"
+                      variant="h6"
+                      className="hover:text-gray-500 transition-colors"
+                    >
                       {category.title}
                     </Typography>
                   </Link>
