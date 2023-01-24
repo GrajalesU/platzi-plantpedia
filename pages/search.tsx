@@ -1,72 +1,65 @@
+import clsx from 'clsx'
+import flatMap from 'lodash/flatMap'
+import get from 'lodash/get'
 import { GetStaticProps } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { ChangeEventHandler, useCallback, useEffect, useState } from 'react'
+import { ChangeEventHandler, useEffect, useState } from 'react'
 
+import { Button } from '@ui/Button'
 import {
   FormControl,
   InputAdornment,
   InputLabel,
   OutlinedInput,
 } from '@ui/FormField'
-import { SearchIcon } from '@ui/icon/Search'
 import { Typography } from '@ui/Typography'
+import { SearchIcon } from '@ui/icon/Search'
 
 import { Layout } from '@components/Layout'
 import { PlantCollection } from '@components/PlantCollection'
 
-import { QueryStatus, searchPlants } from '@api'
-import { debounce } from 'lodash'
-import { useRouter } from 'next/router'
+import { useInfinitePlantSearch } from '@api/query/useInfinitePlantSearch'
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: await serverSideTranslations(locale!),
 })
 
 export default function Search() {
-  const { t } = useTranslation('page-search')
-  const { locale } = useRouter()
+  const { t } = useTranslation(['page-search'])
   const [term, setTerm] = useState('')
-  const [status, setStatus] = useState<QueryStatus>('idle')
-  const [results, setResults] = useState<Plant[]>([])
 
-  const debouncedSearchPlants = useCallback(
-    debounce((term: string) => {
-      searchPlants({
-        term,
-        limit: 10,
-        locale,
-      }).then((data) => {
-        setResults(data)
-        setStatus('success')
-      })
-    }, 500),
-    []
-  )
+  // Debounce the search value.
+  // Remember: With lodash you must use either useCallback or useRef
+  const searchTerm = useDebounce(term, 500)
+
+  // Use react-query to improve our http cache strategy and to make pagination easier
+  const { data, status, isFetchingNextPage, fetchNextPage, hasNextPage } =
+    useInfinitePlantSearch(
+      { term: searchTerm },
+      {
+        enabled: searchTerm.trim().length > 1,
+        staleTime: Infinity,
+      }
+    )
 
   const updateTerm: ChangeEventHandler<HTMLInputElement> = (event) =>
     setTerm(event.currentTarget.value)
 
-  const emptyResults = status === 'success' && results.length === 0
+  const emptyResults =
+    status === 'success' && get(data, 'pages[0].length', 0) === 0
 
-  useEffect(() => {
-    if (term.trim().length < 3) {
-      setStatus('idle')
-      setResults([])
-      return
-    }
-
-    setStatus('loading')
-
-    debouncedSearchPlants(term)
-  }, [term])
+  let results: Plant[] = []
+  if (data?.pages != null) {
+    results = flatMap(data.pages) as Plant[]
+  }
 
   return (
     <Layout>
       <main
         className="pt-16 text-center"
         style={{
-          minHeight: '60vh',
+          minHeight: '50vh',
         }}
       >
         <div className="max-w-5xl mx-auto mb-6">
@@ -96,6 +89,36 @@ export default function Search() {
           ) : null}
         </div>
       </main>
+      {!hasNextPage ? null : (
+        <div className="text-center p4">
+          <Button
+            variant="outlined"
+            disabled={isFetchingNextPage}
+            className={clsx({ 'animate-pulse': isFetchingNextPage })}
+            onClick={() => fetchNextPage()}
+          >
+            {isFetchingNextPage ? t('loading') : t('loadMore')}
+          </Button>
+        </div>
+      )}
     </Layout>
   )
+}
+
+function useDebounce<T>(value: T, wait = 0) {
+  const [debouncedValue, setDebouncedValue] = useState(value)
+
+  useEffect(() => {
+    // Update the inner state after <wait> ms
+    const timeoutId = window.setTimeout(() => {
+      setDebouncedValue(value)
+    }, wait)
+
+    // Clear timeout in case a new value is received
+    return () => {
+      window.clearTimeout(timeoutId)
+    }
+  }, [value])
+
+  return debouncedValue
 }

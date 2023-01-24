@@ -1,3 +1,4 @@
+import { QueryProvider } from '@api/QueryProvider'
 import { UIProvider } from '@ui/Provider'
 import { useServerStyles } from '@ui/ssr'
 import { appWithTranslation } from 'next-i18next'
@@ -8,9 +9,11 @@ const NextApp = ({ Component, pageProps }: AppProps) => {
   useServerStyles()
 
   return (
-    <UIProvider>
-      <Component {...pageProps} />
-    </UIProvider>
+    <QueryProvider>
+      <UIProvider>
+        <Component {...pageProps} />
+      </UIProvider>
+    </QueryProvider>
   )
 }
 
