@@ -1,8 +1,16 @@
 import { Layout } from '@components/Layout'
 import { Button, Typography } from '@material-ui/core'
+import { GetStaticProps } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Link from 'next/link'
+import { useTranslation } from 'react-i18next'
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: await serverSideTranslations(locale!),
+})
 
 export default function NotFoundPage() {
+  const { t } = useTranslation('notFound')
   return (
     <Layout>
       <div
@@ -12,10 +20,10 @@ export default function NotFoundPage() {
         }}
       >
         <Typography variant="h2" className="mb-6">
-          🍂 We are sorry
+          🍂 {t('sorry')}
         </Typography>
         <Typography variant="body1" className="mb-6">
-          We could not find what you were looking for
+        {t('description')}
         </Typography>
         <Link href="/" passHref>
           <Button
@@ -24,7 +32,7 @@ export default function NotFoundPage() {
             href="/"
             title="Go back home"
           >
-            Go back home
+        {t('goBack')}
           </Button>
         </Link>
       </div>
