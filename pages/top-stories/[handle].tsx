@@ -5,6 +5,7 @@ import { PlantCollection } from '@components/PlantCollection'
 import { Typography } from '@material-ui/core'
 import { flatMap } from 'lodash'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 type AuthorDetailProps = {
   author: Author
@@ -13,6 +14,7 @@ type AuthorDetailProps = {
 
 export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({
   params,
+  locale
 }) => {
   const handle = params?.handle
   if (typeof handle !== 'string') {
@@ -27,11 +29,14 @@ export const getStaticProps: GetStaticProps<AuthorDetailProps> = async ({
     const plants = await getPlantListByAuthor({
       authorId: author.id,
     })
+  const i18nConf = await serverSideTranslations(locale!)
+
 
     return {
       props: {
         author,
         plants,
+        ...i18nConf
       },
     }
   } catch (_) {
