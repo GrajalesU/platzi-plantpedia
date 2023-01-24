@@ -12,10 +12,10 @@ export function Header() {
       <div className="mx-auto relative" style={{ maxWidth: '98%' }}>
         <LocaleSwitcher className="flex-grow flex gap-1 justify-items-center" />
         <NavBar title="🌿 Plantpedia">
-          <div className="change-color">
+          <div className="flex gap-4">
             <Link
               href={'/category'}
-              className="mx-4 hover:text-gray-500 transition-colors"
+              className=" hover:text-gray-500 transition-colors"
             >
               {t('categories')}
             </Link>
@@ -24,6 +24,12 @@ export function Header() {
               href={'/top-stories'}
             >
               {t('authors')}
+            </Link>
+            <Link
+              className="hover:text-gray-500 transition-colors"
+              href="/search"
+            >
+              {t('search')}
             </Link>
           </div>
         </NavBar>
