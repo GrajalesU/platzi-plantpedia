@@ -2,6 +2,7 @@ import { NavBar } from '@ui/NavBar'
 import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 import LocaleSwitcher from './LocaleSwitcher'
+import LogInLogOut from './LogInLogOut'
 import { PreviewModeBanner } from './PreviewModeBanner'
 
 export function Header() {
@@ -10,7 +11,10 @@ export function Header() {
     <>
       <PreviewModeBanner />
       <div className="mx-auto relative" style={{ maxWidth: '98%' }}>
-        <LocaleSwitcher className="flex-grow flex gap-1 justify-items-center" />
+        <div className="flex">
+          <LogInLogOut />
+          <LocaleSwitcher className="flex-grow flex gap-1 justify-items-center" />
+        </div>
         <NavBar title="🌿 Plantpedia">
           <div
             className="flex gap-4"

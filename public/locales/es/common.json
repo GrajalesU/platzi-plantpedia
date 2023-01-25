@@ -9,5 +9,8 @@
   "course-owner": "Curso de Next.js de la plataforma Platzi hecho por",
   "images-from": "Images de",
   "language": "Idioma",
-  "search": "Buscar"
+  "search": "Buscar",
+  "signIn": "Iniciar Sesión",
+  "signOut": "Cerrar Sesión"
+
 }

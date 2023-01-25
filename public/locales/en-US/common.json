@@ -9,5 +9,7 @@
   "course-owner": "Platzi's Next.js Course by",
   "images-from": "Images from",
   "language": "Language",
-  "search": "Search"
+  "search": "Search",
+  "signIn": "Sign In",
+  "signOut": "Sign Out"
 }
