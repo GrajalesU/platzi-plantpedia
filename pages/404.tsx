@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 })
 
 export default function NotFoundPage() {
-  const { t } = useTranslation(['notFound'], { useSuspense: false })
+  const { t } = useTranslation(['notFound'])
   return (
     <Layout>
       <div
@@ -23,7 +23,7 @@ export default function NotFoundPage() {
           🍂 {t('sorry')}
         </Typography>
         <Typography variant="body1" className="mb-6">
-        {t('description')}
+          {t('description')}
         </Typography>
         <Link href="/" passHref>
           <Button
@@ -32,7 +32,7 @@ export default function NotFoundPage() {
             href="/"
             title="Go back home"
           >
-        {t('goBack')}
+            {t('goBack')}
           </Button>
         </Link>
       </div>

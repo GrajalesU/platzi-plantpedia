@@ -17,11 +17,10 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
   const categories = await getCategoryList({ locale })
   const i18nConf = await serverSideTranslations(locale!)
 
-
   return {
     props: {
       categories,
-      ...i18nConf
+      ...i18nConf,
     },
     revalidate: 10 * 60,
   }
@@ -30,12 +29,12 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
 export default function Category({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation(['common'], { useSuspense: false })
+  const { t } = useTranslation(['common'])
 
   return (
     <Layout>
       <Typography variant="h1" className="break-words pb-4 px-4">
-        {t("categories")}
+        {t('categories')}
       </Typography>
       <Grid container component="ul" spacing={4}>
         {categories.map((category) => (

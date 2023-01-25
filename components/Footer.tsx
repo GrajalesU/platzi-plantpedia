@@ -5,7 +5,7 @@ import { useTranslation } from 'next-i18next'
 import Link from 'next/link'
 
 export const Footer = ({ className }: { className?: string }) => {
-  const { t } = useTranslation(['common'], { useSuspense: false })
+  const { t } = useTranslation(['common'])
   return (
     <footer
       className={clsx(

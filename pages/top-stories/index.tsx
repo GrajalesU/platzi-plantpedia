@@ -11,7 +11,9 @@ type AuthorsProps = {
   authors: Author[]
 }
 
-export const getStaticProps: GetStaticProps<AuthorsProps> = async ({locale}) => {
+export const getStaticProps: GetStaticProps<AuthorsProps> = async ({
+  locale,
+}) => {
   const authors = await getAuthorList()
   const i18nConf = await serverSideTranslations(locale!)
 
@@ -21,19 +23,18 @@ export const getStaticProps: GetStaticProps<AuthorsProps> = async ({locale}) => 
       ...i18nConf,
     },
     revalidate: 10 * 60,
-
   }
 }
 
 export default function Authors({
   authors,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation(['common'], { useSuspense: false })
+  const { t } = useTranslation(['common'])
 
   return (
     <Layout>
       <Typography variant="h1" className="break-words pb-8 px-4">
-      {t('authors')}
+        {t('authors')}
       </Typography>
       <Grid container spacing={4} className="mb-10" justify="center">
         {authors.map(({ id, photo, fullName, handle }) => (

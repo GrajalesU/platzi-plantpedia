@@ -6,7 +6,7 @@ import LogInLogOut from './LogInLogOut'
 import { PreviewModeBanner } from './PreviewModeBanner'
 
 export function Header() {
-  const { t } = useTranslation(['common'], { useSuspense: false })
+  const { t } = useTranslation(['common'])
   return (
     <>
       <PreviewModeBanner />

@@ -4,18 +4,21 @@ import { useTranslation } from 'react-i18next'
 
 export default function LogInLogOut() {
   const { data: session, status } = useSession()
-  const { t } = useTranslation(['common'], { useSuspense: false })
+  const { t } = useTranslation(['common'])
 
   if (status === 'loading') return null
 
-  if (!session) return <div className='flex gap-1 flex-grow w-2/5 items-center'>
-     <Button onClick={() => signIn()}>{t('signIn')}</Button>
-  </div>
+  if (!session)
+    return (
+      <div className="flex gap-1 flex-grow w-2/5 items-center">
+        <Button onClick={() => signIn()}>{t('signIn')}</Button>
+      </div>
+    )
 
   return (
-    <div className='flex gap-1 flex-grow w-full items-center'>
+    <div className="flex gap-1 flex-grow w-full items-center">
       <Button onClick={() => signOut()}>{t('signOut')}</Button>
-      <span className='block'>{session.user?.name}</span>
+      <span className="block">{session.user?.name}</span>
     </div>
   )
 }

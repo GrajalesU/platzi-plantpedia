@@ -95,7 +95,7 @@ export default function PlantDetail({
   otherEntries,
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation(['entries'], { useSuspense: false })
+  const { t } = useTranslation(['entries'])
 
   return (
     <Layout>
