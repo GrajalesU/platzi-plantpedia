@@ -12,7 +12,12 @@ export function Header() {
       <div className="mx-auto relative" style={{ maxWidth: '98%' }}>
         <LocaleSwitcher className="flex-grow flex gap-1 justify-items-center" />
         <NavBar title="🌿 Plantpedia">
-          <div className="flex gap-4">
+          <div
+            className="flex gap-4"
+            style={{
+              gap: '1rem',
+            }}
+          >
             <Link
               href={'/category'}
               className=" hover:text-gray-500 transition-colors"
