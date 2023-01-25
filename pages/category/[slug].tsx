@@ -6,7 +6,6 @@ import { Typography } from '@material-ui/core'
 import { flatMap } from 'lodash'
 import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useRouter } from 'next/router'
 
 type CategoryProps = {
   category: Category
@@ -29,14 +28,13 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
       category: slug,
       locale,
     })
-  const i18nConf = await serverSideTranslations(locale!)
-
+    const i18nConf = await serverSideTranslations(locale!)
 
     return {
       props: {
         category,
         plants,
-        ...i18nConf
+        ...i18nConf,
       },
     }
   } catch (_) {
@@ -83,7 +81,6 @@ export default function Category({
   category,
   plants,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  
   return (
     <Layout>
       <div className="relative text-center mb-10">

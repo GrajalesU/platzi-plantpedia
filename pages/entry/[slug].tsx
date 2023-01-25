@@ -10,7 +10,6 @@ import { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useTranslation } from 'next-i18next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
 type ProductDetailProps = {
   plant: Plant
