@@ -1,37 +1,25 @@
-import {
-  QueryFunction,
-  UseInfiniteQueryOptions,
-  useInfiniteQuery,
-} from 'react-query'
-import {
-  ISearchPlantQuery,
-  ISearchPlantQueryVariables,
-} from '../generated/graphql'
+import { useInfiniteQuery } from 'react-query'
 import { sdk } from '../index'
 import { selectPlants } from '../selectors'
 
-type InfinitePlantListArgs = Pick<ISearchPlantQueryVariables, 'term' | 'limit'>
+// type InfinitePlantListArgs = Pick<ISearchPlantQueryVariables, 'term' | 'limit'>
 
-type QueryKey = ['searchPlants', InfinitePlantListArgs]
+// type QueryKey = ['searchPlants', InfinitePlantListArgs]
 
-const fetchPlants: QueryFunction<ISearchPlantQuery, QueryKey> = ({
-  queryKey,
-  pageParam = 0,
-}) => {
+// const fetchPlants: QueryFunction<ISearchPlantQuery, QueryKey>
+
+const fetchPlants = ({ queryKey, pageParam = 0 }: any) => {
   const [_key, { term, limit }] = queryKey
 
   return sdk.searchPlant({ term, limit, skip: pageParam })
 }
 
-type Options = Pick<
-  UseInfiniteQueryOptions,
-  'enabled' | 'staleTime' | 'refetchOnWindowFocus' | 'refetchOnMount'
->
+// type Options = Pick<
+//   UseInfiniteQueryOptions,
+//   'enabled' | 'staleTime' | 'refetchOnWindowFocus' | 'refetchOnMount'
+// >
 
-export function useInfinitePlantSearch(
-  args: InfinitePlantListArgs,
-  options?: Options
-) {
+export function useInfinitePlantSearch(args: any, options?: any) {
   return useInfiniteQuery(['searchPlants', args], fetchPlants, {
     ...options,
     select: (data) => ({
