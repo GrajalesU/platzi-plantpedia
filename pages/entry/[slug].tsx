@@ -97,7 +97,7 @@ export default function PlantDetail({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter()
-  const { t } = useTranslation('entries')
+  const { t } = useTranslation(['entries'], { useSuspense: false })
 
   if (router.isFallback) {
     return (

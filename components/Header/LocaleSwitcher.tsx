@@ -5,10 +5,10 @@ import { useRouter } from 'next/router'
 
 const LocaleSwitcher = ({ className = '' }: { className?: string }) => {
   const { locale, asPath: currentPath } = useRouter()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation(['common'], { useSuspense: false })
 
   return (
-    <div className='flex w-full  h-8 items-center justify-end'>
+    <div className='flex w-full items-center justify-end'>
       <div className="flex gap-2  right-1 mr-6">
         {t('language')}: 
         {locale === 'en-US' ? (

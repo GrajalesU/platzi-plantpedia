@@ -30,8 +30,7 @@ export const getStaticProps: GetStaticProps<CategoryProps> = async ({
 export default function Category({
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation('common')
-  console.log(t("categories"))
+  const { t } = useTranslation(['common'], { useSuspense: false })
 
   return (
     <Layout>

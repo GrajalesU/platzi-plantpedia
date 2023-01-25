@@ -26,7 +26,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
 })
 
 export default function Search() {
-  const { t } = useTranslation(['page-search'])
+  const { t } = useTranslation(['page-search'], { useSuspense: false })
   const [term, setTerm] = useState('')
 
   // Debounce the search value.

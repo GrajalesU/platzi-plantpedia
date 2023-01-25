@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<AuthorsProps> = async ({locale}) => 
 export default function Authors({
   authors,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const { t } = useTranslation('common')
+  const { t } = useTranslation(['common'], { useSuspense: false })
 
   return (
     <Layout>

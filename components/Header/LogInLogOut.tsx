@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 export default function LogInLogOut() {
   const { data: session, status } = useSession()
-  const { t } = useTranslation('common')
+  const { t } = useTranslation(['common'], { useSuspense: false })
 
   if (status === 'loading') return null
 
@@ -13,7 +13,7 @@ export default function LogInLogOut() {
   </div>
 
   return (
-    <div className='flex gap-1 flex-grow w-3/5 items-center'>
+    <div className='flex gap-1 flex-grow w-full items-center'>
       <Button onClick={() => signOut()}>{t('signOut')}</Button>
       <span className='block'>{session.user?.name}</span>
     </div>
