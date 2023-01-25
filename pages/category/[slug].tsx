@@ -83,16 +83,7 @@ export default function Category({
   category,
   plants,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter()
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <div className="flex justify-center items-center min-h-screen">
-          Loading...
-        </div>
-      </Layout>
-    )
-  }
+  
   return (
     <Layout>
       <div className="relative text-center mb-10">

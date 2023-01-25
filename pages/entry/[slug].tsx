@@ -96,18 +96,8 @@ export default function PlantDetail({
   otherEntries,
   categories,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter()
   const { t } = useTranslation(['entries'], { useSuspense: false })
 
-  if (router.isFallback) {
-    return (
-      <Layout>
-        <div className="flex justify-center items-center min-h-screen">
-          Loading...
-        </div>
-      </Layout>
-    )
-  }
   return (
     <Layout>
       <Grid container spacing={4}>
